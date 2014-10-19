@@ -147,6 +147,9 @@ void draw(){
          // frog in pond
          if(frogY == pondY){
            gameState = GAME_WIN;
+           dead = 0;
+           frogX = frogInitX;
+           frogY = frogInitY;
          }
             
   
