@@ -147,16 +147,12 @@ void draw(){
          }
          
          // frog die
-         //if(gameState = FROG_DIE){
-           //for(int i=0;i<life;i++){
-            //image(imgDeadFrog,64+i*48 ,32); 
-           //}
-         //}
+         
 
-        //  game over
-        if(life == 0){
+         //  game over
+         if(life == 0){
           gameState = GAME_LOSE;
-        }          
+         }          
   
         // -------------------------------
         
