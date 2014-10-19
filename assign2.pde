@@ -9,6 +9,8 @@ float pondY;
 
 float speed;
 
+int deadlife = 1;
+int dead = 0 ;                    //dead
 int life;
 
 int frog;
@@ -87,6 +89,7 @@ void draw(){
         }
         break;
     case GAME_RUN:
+        deadlife = 4;
         background(10,110,16);
         
         // draw Pond
@@ -145,14 +148,7 @@ void draw(){
          if(frogY == pondY){
            gameState = GAME_WIN;
          }
-         
-         // frog die
-         
-
-         //  game over
-         if(life == 0){
-          gameState = GAME_LOSE;
-         }          
+            
   
         // -------------------------------
         
@@ -187,25 +183,34 @@ void draw(){
          float frogCX = frogX+frogW/2;
          float frogCY = frogY+frogH/2;
          
-         // car1 hitTest
-        if( (frogX==rightCar1X) && (frogY==rightCar1Y) ){
+         // car hitTest
+        if( (frogX==rightCar1X) && (frogY==rightCar1Y) ||(frogX==rightCar2X) && (frogY==rightCar2Y) ||(frogX==leftCar1X) && (frogY==leftCar1Y) ||(frogX==leftCar2X) && (frogY==leftCar2Y)){
           gameState = FROG_DIE;
+          dead ++ ;
+          
         }
-        
-         // car2 hitTest
-         if( (frogX==rightCar2X) && (frogY==rightCar2Y) ){
-          gameState = FROG_DIE;
+      
+
+       // frog die
+
+         if (dead == 2 || dead == 3 || dead ==1  )
+         {
+           for(int i =1 ; i<=dead ;i++ )
+               image(imgDeadFrog,64+(i-1)*48,32);
+         }
+       
+
+         
+         // game over
+        if(dead == 3){
+          gameState = GAME_LOSE;
+          if(key==ENTER){
+            gameState = GAME_START;
+            dead = 0;
+            frogX = frogInitX;
+            frogY = frogInitY;
+          }
         }
-        
-         // car3 hitTest
-        if( (frogX==leftCar1X) && (frogY==leftCar1Y) ){
-          gameState = FROG_DIE;
-        } 
-         // car4 hitTest
-         if( (frogX==leftCar2X) && (frogY==leftCar2Y) ){
-          gameState = FROG_DIE;
-        }
-        
      
         break;
     case GAME_WIN:
